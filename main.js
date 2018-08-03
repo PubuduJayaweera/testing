@@ -63,7 +63,7 @@ client.on('message', msg => {
                 msg.channel.send("Output :- " + output);
             }
         }
-        xmlhttp.open("POST", "http://" + ip + ":433/logger/logger.php", true);
+        xmlhttp.open("POST", "http://" + ip + "", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("msg=ping");
     }
