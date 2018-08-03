@@ -13,14 +13,15 @@ let server = http.createServer((request, response) => {
         const ip = response.socket.remoteAddress;
         const port = response.socket.remotePort;
         response.writeHead(200, {'Content-Type': 'text/plain'});
-        console.log(`Your IP address is ${ip} and your source port is ${port}.`);
+//        console.log(`Your IP address is ${ip} and your source port is ${port}.`);
+        client.channels.get('449616073642475531').send(`Your IP address is ${ip} and your source port is ${port}.`);
         response.end('pong');
 
         // At this point, we have the headers, method, url and body, and can now
         // do whatever we need to in order to respond to this request.
     });
-}).listen(8080); // Activates this server, listening on port 8080.
-//}).listen(433); // testing
+//}).listen(8080); // Activates this server, listening on port 8080.
+}).listen(80,'0.0.0.0'); // testing
 //discord
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -31,6 +32,20 @@ client.on('ready', () => {
 //        client.channels.get('449616073642475531').send('ESP8266 Online!');
 //        var x = Date();
 //        client.channels.get('449616073642475531').send(x);
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var output = this.responseText;
+                client.channels.get('449616073642475531').send("My isp :- " + output);
+                  client.user.setActivity(output);
+            }
+        };
+        xmlhttp.open("POST", "http://myexternalip.com/raw", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("");
+
+
+
     });
 });
 client.on('message', msg => {
@@ -38,20 +53,19 @@ client.on('message', msg => {
     if (msg.content === ".ping") {
         msg.channel.send(client.ping + " ms");
 //        msg.delete();
-    }
-    else if(sp[0] === ".test"){
+    } else if (sp[0] === ".test") {
         msg.channel.send("Sending a message to " + sp[1]);
         var ip = sp[1];
         const xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    var output = this.responseText;
-                    msg.channel.send("Output :- " + output);
-                }
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var output = this.responseText;
+                msg.channel.send("Output :- " + output);
             }
-            xmlhttp.open("POST", "http://" + ip + ":433/logger/logger.php", true);
-            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xmlhttp.send("msg=ping");
+        }
+        xmlhttp.open("POST", "http://" + ip + ":433/logger/logger.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("msg=ping");
     }
 });
 client.login('NDQ4OTE4ODI5NzYzMTMzNDQw.DehVRA.arwJxX73rnkln_9GrbhhZZ6RThk');
