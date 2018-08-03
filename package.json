@@ -10,6 +10,9 @@
     ],
     "author": "Pubudu",
     "contributors": [],
+    "scripts": {
+    "start": "node main.js"
+    },
     "dependencies": {
         "discord.js": "^11.3.2",
         "external-ip": "^2.0.3",
