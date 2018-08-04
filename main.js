@@ -14,30 +14,30 @@ let server = http.createServer((request, response) => {
         const port = response.socket.remotePort;
         response.writeHead(200, {'Content-Type': 'text/plain'});
 //        console.log(`Your IP address is ${ip} and your source port is ${port}.`);
-        client.channels.get('449616073642475531').send(`Your IP address is ${ip} and your source port is ${port}.`);
+        client.channels.get(channelid).send(`Your IP address is ${ip} and your source port is ${port}.`);
+        client.channels.get(channelid).send('Got this from request to me');
+        client.channels.get(channelid).send(body);
         response.end('pong');
-
         // At this point, we have the headers, method, url and body, and can now
         // do whatever we need to in order to respond to this request.
     });
-}).listen(8080,'0.0.0.0'); // Activates this server, listening on port 8080.
-// }).listen(80,'0.0.0.0'); // testing
+//}).listen(8080); // Activates this server, listening on port 8080.
+}).listen(80, '0.0.0.0'); // testing
 //discord
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const channelid = '475324346127089686';
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     client.generateInvite(["ADMINISTRATOR"]).then(link => {
         console.log(link);
-//        client.channels.get('449616073642475531').send('ESP8266 Online!');
-//        var x = Date();
-//        client.channels.get('449616073642475531').send(x);
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 var output = this.responseText;
-                client.channels.get('449616073642475531').send("My isp :- " + output);
-                  client.user.setActivity(output);
+                console.log(output);
+                client.channels.get(channelid).send("My isp :- " + output);
+                client.user.setActivity(output);
             }
         };
         xmlhttp.open("POST", "http://myexternalip.com/raw", true);
@@ -68,4 +68,4 @@ client.on('message', msg => {
         xmlhttp.send("msg=ping");
     }
 });
-client.login('NDQ4OTE4ODI5NzYzMTMzNDQw.DehVRA.arwJxX73rnkln_9GrbhhZZ6RThk');
+client.login('NDY2NjMxODIwMjI2NTkyNzc4.DkdXUQ.rVFldLTXXVZCj3iezqlB3FTAhEI');
