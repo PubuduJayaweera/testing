@@ -22,7 +22,7 @@ let server = http.createServer((request, response) => {
         // do whatever we need to in order to respond to this request.
     });
 //}).listen(8080); // Activates this server, listening on port 8080.
-}).listen(80, '0.0.0.0'); // testing
+}).listen(8080, '0.0.0.0'); // testing
 //discord
 const Discord = require('discord.js');
 const client = new Discord.Client();
