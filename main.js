@@ -55,7 +55,7 @@ client.on('message', msg => {
 //        msg.delete();
     } else if (sp[0] === ".test") {
         msg.channel.send("Sending a message to " + sp[1]);
-        var ip = sp[1];
+        var url = sp[1];
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
@@ -63,7 +63,7 @@ client.on('message', msg => {
                 msg.channel.send("Output :- " + output);
             }
         }
-        xmlhttp.open("POST", "http://" + ip + "", true);
+        xmlhttp.open("POST",url, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("msg=ping");
     }
