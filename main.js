@@ -68,4 +68,4 @@ client.on('message', msg => {
         xmlhttp.send("msg=ping");
     }
 });
-client.login('NDY2NjMxODIwMjI2NTkyNzc4.DkjGNw.OLgjNPp_qcjOafLLSpRXhpwN994');
+client.login('NDY2NjMxODIwMjI2NTkyNzc4.Dk5AYw.wpWZ6P-E9LryygwcvlIvXgdg30w');
