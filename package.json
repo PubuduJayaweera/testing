@@ -1,5 +1,5 @@
 {
-    "name": "nodemcu",
+    "name": "Mod",
     "version": "1.0.0",
     "keywords": [
         "util",
@@ -11,9 +11,12 @@
     "author": "Pubudu",
     "contributors": [],
     "scripts": {
-    "start": "node main.js"
+        "start": "node main.js"
     },
     "dependencies": {
-        "discord.js": "^11.3.2"
+        "discord.js": "^11.3.2",
+        "jimp": "^0.3.11",
+        "npm": "^6.4.1",
+        "xmlhttprequest": "^1.8.0"
     }
 }
